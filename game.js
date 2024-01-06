@@ -13,17 +13,21 @@ function nextSequence() {
 
     //adds random color to array//
     gamePattern.push(randomChosenColour);
-};
 
 // choose the element that the randomChosenColor is linked too //
 // the randomChosenColour is going to be a "string" so we can use that as the targeted element //
 
+    
+    // flash effect using fadeIn and fadeOut //
+    $("#" + randomChosenColour).fadeIn(200).fadeOut(200).fadeIn(200)
 
+    // makes audio variable within Audio "constructor" //
+    var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
+    
+    // so within the Audio "constructor" there is a play function we are calling"
+    audio.play();
+};
+  
 
-function flashAnimation() {
-    // Flash effect using fadeIn and fadeOut
-    $("'#gamePattern[0]'").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
-  }
 
 nextSequence();
-flashAnimation();
