@@ -21,6 +21,7 @@ $(".btn").on("click", function() {
 
     // adds .pressed css to clicked color //
     animatePress(userChosenColour);
+
 });
 
 
@@ -55,6 +56,16 @@ function playSound(name) {
 //add animatons to user clicks //
 function animatePress(currentColour) {
     
-   // button that gets clicked turns to class pressed // 
-   $("." + currentColour).addClass("pressed");
+    // button that gets clicked turns to class pressed // 
+  
+    $("." + currentColour).addClass("pressed");
+
+
+    // function to remove pressed class after 100 second delay //
+    setTimeout(function() {
+        $("." + currentColour).removeClass("pressed");
+      }, 100);
+
+
 }
+
