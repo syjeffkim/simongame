@@ -18,6 +18,9 @@ $(".btn").on("click", function() {
     
     // plays sound of clicked color //
     playSound(userChosenColour)
+
+    // adds .pressed css to clicked color //
+    animatePress(userChosenColour);
 });
 
 
@@ -47,4 +50,11 @@ function playSound(name) {
     
         // so within the Audio "constructor" there is a play function we are calling"
         audio.play();
+}
+
+//add animatons to user clicks //
+function animatePress(currentColour) {
+    
+   // button that gets clicked turns to class pressed // 
+   $("." + currentColour).addClass("pressed");
 }
