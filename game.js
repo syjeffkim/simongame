@@ -15,15 +15,12 @@ $(".btn").on("click", function() {
 
     // pushes chosen color to array //
     userClickedPattern.push(userChosenColour);
-        // makes audio variable within Audio "constructor" //
     
-    var audio = new Audio("sounds/" + userChosenColour + ".mp3");
-
-    // so within the Audio "constructor" there is a play function we are calling"
-    audio.play();
+    // plays sound of clicked color //
+    playSound(userChosenColour)
 });
 
-// play sounds when you click button //
+
 
 
 
@@ -40,9 +37,14 @@ function nextSequence() {
     // flash effect using fadeIn and fadeOut //
     $("#" + randomChosenColour).fadeIn(200).fadeOut(200).fadeIn(200)
 
-    // makes audio variable within Audio "constructor" //
-    var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
-    
-    // so within the Audio "constructor" there is a play function we are calling"
-    audio.play();
+    // plays sound of randomized color //
+    playSound(randomChosenColour);
 };
+
+function playSound(name) {
+        // makes audio variable within Audio "constructor" //
+        var audio = new Audio("sounds/" + name + ".mp3");
+    
+        // so within the Audio "constructor" there is a play function we are calling"
+        audio.play();
+}
