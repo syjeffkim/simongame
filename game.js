@@ -6,7 +6,19 @@ var gamePattern = [];
 
 // array to track user clicks //
 var userClickedPattern = [];
-console.log(userClickedPattern);
+
+// handler function to detect when buttons are clicked with jQuery //
+
+$(".btn").on("click", function() {
+
+    // creates variable for clicked btn //
+    var userChosenColour = $(this).attr("id");
+
+    // pushes chosen color to array //
+    userClickedPattern.push(userChosenColour);
+    console.log(userClickedPattern);
+
+});
 
 // generates random number to choose from buttonColours //
 function nextSequence() {
@@ -27,10 +39,3 @@ function nextSequence() {
     // so within the Audio "constructor" there is a play function we are calling"
     audio.play();
 };
-
-// handler function to detect when buttons are clicked with jQuery //
-$button.click(function(event) {
-    var userChosenColour = this.event
-})
-
-nextSequence();
