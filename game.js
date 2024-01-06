@@ -19,9 +19,11 @@ function nextSequence() {
 // the randomChosenColour is going to be a "string" so we can use that as the targeted element //
 
 
+
 function flashAnimation() {
     // Flash effect using fadeIn and fadeOut
-    $("#red").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+    $("'#gamePattern[0]'").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
   }
 
-  flashAnimation();
+nextSequence();
+flashAnimation();
