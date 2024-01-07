@@ -110,6 +110,15 @@ function checkAnswer(currentLevel) {
     If so then log "success", otherwise log "wrong".*/
     if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
         console.log("success");
+
+    /* If the user got the most recent answer right above, then check that they have finished their sequence with another if statement.
+    for example, the gamePattern is at red, blue, green. If the user has the same amount of clicks it should go to the next part of the game*/
+    if (userClickedPattern.length === gamePattern.length) {
+            // Call nextSequence() after a 1000 millisecond delay.//
+            setTimeout(function() {
+             nextSequence();
+           }, 1000);
+         }
     
     } else {
         console.log("wrong");
@@ -130,11 +139,5 @@ function checkAnswer(currentLevel) {
     }
     
 
-/* If the user got the most recent answer right above, then check that they have finished their sequence with another if statement.
-for example, the gamePattern is at red, blue, green. If the user has the same amount of clicks it should go to the next part of the game*/
-    if (userClickedPattern.length === gamePattern.length) {
-       // Call nextSequence() after a 1000 millisecond delay.//
-       setTimeout(function() {
-        nextSequence();
-      }, 1000);
-    }
+
+
