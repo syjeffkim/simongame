@@ -49,27 +49,7 @@ $(".btn").on("click", function() {
 
     // Gives you the current level because everytime a user clicks it goes up a level//
     checkAnswer(userClickedPattern.length - 1);
-    
-    //1. In the sounds folder, there is a sound called wrong.mp3, play this sound if the user got one of the answers wrong. //
-    if (userClickedPattern[level] !== gamePattern[level]) {
-               // makes audio variable within Audio "constructor" //
-               var wrongAudio = new Audio("wrong.mp3");
-    
-               // so within the Audio "constructor" there is a play function we are calling"
-               wrongAudio.play();
-
-               /* 2; In the styles.css file, there is a class called "game-over", apply 
-               this class to the body of the website when the user gets one of the answers wrong and then remove it after 200 milliseconds. */
-               $("body").addClass(".game-over");
-               setTimeout(function() {
-               $("body").removeClass(".game-over");
-               }, 200);
-               // 3. Change the h1 title to say "Game Over, Press Any Key to Restart" if the user got the answer wrong.//
-               $("h1").text("Game Over, Press Any Key to Restart");
-    }
-    
-
-});
+});    
 
 // chooses next color in sequence and indicates with flash and sound //
 function nextSequence() {
@@ -130,17 +110,31 @@ function checkAnswer(currentLevel) {
     If so then log "success", otherwise log "wrong".*/
     if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
         console.log("success");
+    
     } else {
         console.log("wrong");
+        //1. In the sounds folder, there is a sound called wrong.mp3, play this sound if the user got one of the answers wrong. //
+        playSound("wrong");
+
+        /* 2; In the styles.css file, there is a class called "game-over", apply 
+        this class to the body of the website when the user gets one of the answers wrong and then remove it after 200 milliseconds. */
+        $("body").addClass("game-over");
+        setTimeout(function() {
+        $("body").removeClass("game-over");
+        }, 200);
+
+        // 3. Change the h1 title to say "Game Over, Press Any Key to Restart" if the user got the answer wrong.//
+        $("h1").text("Game Over, Press Any Key to Restart");
+}
+
     }
     
 
 /* If the user got the most recent answer right above, then check that they have finished their sequence with another if statement.
 for example, the gamePattern is at red, blue, green. If the user has the same amount of clicks it should go to the next part of the game*/
     if (userClickedPattern.length === gamePattern.length) {
-       // 5. Call nextSequence() after a 1000 millisecond delay.//
+       // Call nextSequence() after a 1000 millisecond delay.//
        setTimeout(function() {
         nextSequence();
       }, 1000);
     }
-}
