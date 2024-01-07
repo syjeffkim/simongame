@@ -7,27 +7,30 @@ var gamePattern = [];
 // array to track user clicks //
 var userClickedPattern = [];
 
-// You'll need a way to keep track of whether if the game has started or not, so you only call nextSequence() on the first keypress. //
-
+// keydown indiciates start of the game. if it hasn't var started starts at false//
 var started = false;
 
-// to set levels //
-
+// to set levels and to start it from 0//
 var level = 0;
 
-// 1. Use jQuery to detect when a keyboard key has been pressed, when that happens for the first time, call nextSequence(). //
+/* started is set to false. so this function is pretty much going to do an action if its TRUE (!started) a key was pressed. 
+but in the function it sets the started to true. so next time you press a key its checking if its FALSE a key was pressed.
+so now when you press a key, nothing happens because it is TRUE that a key was pressed not false */
 
 $(document).keydown(function() {
 
+// so if the game hasn't started it will do these methods //
+if (!started) {
 
-        //3. The h1 title starts out saying "Press A Key to Start", when the game has started, change this to say "Level 0".
+        // targets id level-title and changes its text //
         $("#level-title").text("Level " + level);
+        
         nextSequence();
+        
+        // the variable now needs to be true so it knows the game has started //
         started = true;
-    
+    }   
 });
-
-
 
 // handler function to detect when buttons are clicked with jQuery //
 $(".btn").on("click", function() {
@@ -52,10 +55,10 @@ $(".btn").on("click", function() {
 
 // chooses next color in sequence and indicates with flash and sound //
 function nextSequence() {
-    //4. Inside nextSequence(), increase the level by 1 every time nextSequence() is called. //
+    // increase the level by 1 every time nextSequence() is called. We put it in here because line below //
     level++;
 
-    //5. Inside nextSequence(), update the h1 with this change in the value of level. //
+    // update the h1 with this change in the value of level //
     $("#level-title").text("Level " + level);
 
     // chooses random number 0-3 //
