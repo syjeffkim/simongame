@@ -47,15 +47,36 @@ $(".btn").on("click", function() {
     // adds .pressed css to clicked color //
     animatePress(userChosenColour);
 
-    // 2. Call checkAnswer() after a user has clicked and chosen their answer, passing in the index of the last answer in the user's sequence.//
-    //e.g. If the user has pressed red, green, red, yellow, the index of the last answer is 3.//
-    checkAnswer(userClickedPattern.length);
+    // Gives you the current level because everytime a user clicks it goes up a level//
+    checkAnswer(userClickedPattern.length - 1);
+    
+    //1. In the sounds folder, there is a sound called wrong.mp3, play this sound if the user got one of the answers wrong. //
+    if (userClickedPattern[level] !== gamePattern[level]) {
+               // makes audio variable within Audio "constructor" //
+               var wrongAudio = new Audio("wrong.mp3");
+    
+               // so within the Audio "constructor" there is a play function we are calling"
+               wrongAudio.play();
+
+               /* 2; In the styles.css file, there is a class called "game-over", apply 
+               this class to the body of the website when the user gets one of the answers wrong and then remove it after 200 milliseconds. */
+               $("body").addClass(".game-over");
+               setTimeout(function() {
+               $("body").removeClass(".game-over");
+               }, 200);
+               // 3. Change the h1 title to say "Game Over, Press Any Key to Restart" if the user got the answer wrong.//
+               $("h1").text("Game Over, Press Any Key to Restart");
+    }
     
 
 });
 
 // chooses next color in sequence and indicates with flash and sound //
 function nextSequence() {
+    /* Once nextSequence() is triggered, reset the userClickedPattern to an empty array ready for the next level.
+    this is so checkAnser() works properly and the game understands where the player is at.*/
+    userClickedPattern.length = 0;
+
     // increase the level by 1 every time nextSequence() is called. We put it in here because line below //
     level++;
 
@@ -84,6 +105,7 @@ function playSound(name) {
     
         // so within the Audio "constructor" there is a play function we are calling"
         audio.play();
+
 }
 
 //add animatons to user clicks //
@@ -94,26 +116,31 @@ function animatePress(currentColour) {
     $("." + currentColour).addClass("pressed");
 
 
-    // function to remove pressed class after 100 second delay //
+    // function to remove pressed class after 100 millisecond delay //
     setTimeout(function() {
         $("." + currentColour).removeClass("pressed");
       }, 100);
 };
 
 
-// 1. Create a new function called checkAnswer(), it should take one input with the name currentLevel //
+// function called checkAnswer(), it should take one input with the name currentLevel //
 function checkAnswer(currentLevel) {
-    var currentLevel = level;
-
-    /* 3. Write an if statement inside checkAnswer() to check if the most recent user answer is the same as the game pattern. 
+    
+    /* if statement inside checkAnswer() to check if the most recent user answer is the same as the game pattern color. 
     If so then log "success", otherwise log "wrong".*/
-    if (userChosenColour === randomChosenColour) {
+    if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
         console.log("success");
     } else {
         console.log("wrong");
     }
     
-    /*You can now use these log statements along with logging the values of userClickedPattern and gamePattern in the 
-    Chrome Developer Tools console to check whether if your code is performing as you would expect and debug your code as needed.
-    Once you're done, feel free to remove these log statements. */
+
+/* If the user got the most recent answer right above, then check that they have finished their sequence with another if statement.
+for example, the gamePattern is at red, blue, green. If the user has the same amount of clicks it should go to the next part of the game*/
+    if (userClickedPattern.length === gamePattern.length) {
+       // 5. Call nextSequence() after a 1000 millisecond delay.//
+       setTimeout(function() {
+        nextSequence();
+      }, 1000);
+    }
 }
